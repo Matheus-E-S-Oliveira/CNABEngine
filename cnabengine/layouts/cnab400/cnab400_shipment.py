@@ -1,5 +1,5 @@
 from cnabengine.utils.enums import FileType, ModelCNAB
-from cnabengine.core.validators.cnab400 import validate_header, validate_body, validate_trailer
+from cnabengine.core.validators.cnab400.cnab400_shipment import validate_header, validate_body, validate_trailer
     
 class CNAB400Shipment:
     def __init__(self, lines: list[str]):
