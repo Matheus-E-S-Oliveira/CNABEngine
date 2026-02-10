@@ -3,8 +3,7 @@ from cnabengine.core.validators.core.numeric_validator import NumericValidator
 from cnabengine.core.validators.core.alpha_validator import AlphaValidator
 from cnabengine.core.validators.core.date_validator import DateValidator
 
-def validate_body(body: list[str]) -> list[str]:
-    errors = []
+def validate_body(body: list[str], errors: list[str]) -> None:
     
     for i, line in enumerate(body, start=2):
         context = f"BODY LINE {i}"
@@ -114,9 +113,9 @@ def validate_body(body: list[str]) -> list[str]:
         
         # Posição no arquivo: 174 à 205 layout de multa ou desconto
         if(line[108:110] in ["35", "36"]):
-            fineFieldsLayout(line=line, context=context, errors=errors)
+            __fineFieldsLayout(line=line, context=context, errors=errors)
         else:
-            discountFieldsLayout(line=line, context=context, errors=errors)
+            __discountFieldsLayout(line=line, context=context, errors=errors)
             
         # Posição no arquivo: 206-218
         NumericValidator.validate_numeric(field=line[205:218], context=context, position="206-218", errors=errors)
@@ -160,9 +159,9 @@ def validate_body(body: list[str]) -> list[str]:
         # Posição no arquivo: 395-400
         NumericValidator.validate_numeric_no_zeros(field=line[394:400], context=context, position="395-400", errors=errors, fieldName="número do registro")
     
-    return errors
+    return
         
-def fineFieldsLayout(line: str, context: str, errors: list[str]) -> None:
+def __fineFieldsLayout(line: str, context: str, errors: list[str]) -> None:
     # Posição no arquivo: 174-174
     NumericValidator.validate_numeric_no_zeros(field=line[173:174], context=context, position="174-174", errors=errors, fieldName="código da multa")
     
@@ -172,7 +171,7 @@ def fineFieldsLayout(line: str, context: str, errors: list[str]) -> None:
     # Posição no arquivo: 181-192
     NumericValidator.validate_numeric(field=line[180:192], context=context, position="181-192", errors=errors)
     
-def discountFieldsLayout(line: str, context: str, errors: list[str]) -> None:
+def __discountFieldsLayout(line: str, context: str, errors: list[str]) -> None:
     # Posição no arquivo: 174-179
     DateValidator.validate_date_format_ddmmaa(field=line[173:179], context=context, position="174-179", errors=errors)
     

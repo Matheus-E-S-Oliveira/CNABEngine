@@ -3,13 +3,12 @@ from cnabengine.core.validators.core.numeric_validator import NumericValidator
 from cnabengine.core.validators.core.alpha_validator import AlphaValidator
 from cnabengine.core.validators.core.date_validator import DateValidator
 
-def validate_header(header: str) -> list[str]:
-    errors = []
+def validate_header(header: str, errors: list[str]) -> None:
     context = "HEADER"
  
     if len(header) != 400:
         errors.append(f"[{context}]: O cabeçalho (HEADER) do CNAB 400 deve conter exatamente 400 caracteres.")
-        return errors
+        return
 
     # Posição no arquivo: 001-001
     StaticValidator.validate_field_static_numeric(field=header[0:1], context=context, position='001-001', errors=errors, value="0")    
@@ -68,4 +67,4 @@ def validate_header(header: str) -> list[str]:
     # Posição no arquivo: 395-400
     StaticValidator.validate_field_static_numeric(field=header[394:400], context=context, position="395-400", errors=errors, value="000001")
     
-    return errors
+    return

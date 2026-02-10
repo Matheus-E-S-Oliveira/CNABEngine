@@ -1,11 +1,8 @@
 from cnabengine.core.validators.core.static_validator import StaticValidator
 from cnabengine.core.validators.core.numeric_validator import NumericValidator
-from cnabengine.core.validators.core.alpha_validator import AlphaValidator
-from cnabengine.core.validators.core.date_validator import DateValidator
 
-def validate_trailer(trailer: str, len: int) -> list[str]:
+def validate_trailer(trailer: str, errors: list[str], number_lines: int) -> None:
     context = "TRAILER"
-    errors = []
     
     if len(trailer) != 400:
         errors.append(f"[{context}]: comprimento inválido. Cada linha do CNAB 400 deve conter exatamente 400 caracteres.")
@@ -18,6 +15,6 @@ def validate_trailer(trailer: str, len: int) -> list[str]:
     StaticValidator.validate_field_space(trailer[1:394], context=context, position="002-394", errors=errors)
     
     # Posição no arquivo: 395-400
-    NumericValidator.validate_numeric_no_zeros(trailer[394:400], context=context, position="395-400", errors=errors, fieldName="número de registro")
+    NumericValidator.validate_numeric_no_zeros_and_register(trailer[394:400], context=context, position="395-400", errors=errors, fieldName="número de registro", number_lines=number_lines)
     
-    return errors
+    return

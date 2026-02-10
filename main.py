@@ -16,7 +16,7 @@ def main():
         
         if(extension.lower() == FileType.REM.value):
             file = CNAB400Shipment(lines)
-            file.check_layout()
+            erros = file.validate()
             
         elif(extension.lower() == FileType.RET.value):
             print("É um arquivo de retorno")
