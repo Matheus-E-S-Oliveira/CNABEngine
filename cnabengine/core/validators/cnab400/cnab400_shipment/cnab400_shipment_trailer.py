@@ -18,6 +18,6 @@ def validate_trailer(trailer: str, len: int) -> list[str]:
     StaticValidator.validate_field_space(trailer[1:394], context=context, position="002-394", errors=errors)
     
     # Posição no arquivo: 395-400
-    NumericValidator.validate_numeric_no_zeros(trailer[394:400], context=context, position="395-400", errors=errors fieldName="número de registro")
+    NumericValidator.validate_numeric_no_zeros(trailer[394:400], context=context, position="395-400", errors=errors, fieldName="número de registro")
     
     return errors
