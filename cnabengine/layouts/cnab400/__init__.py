@@ -1,2 +1,2 @@
-from cnab400_shipment import CNAB400Shipment
-from cnab400_return import Cnab400Return
+from cnabengine.layouts.cnab400.cnab400_shipment import  CNAB400Shipment
+# from cnabengine.layouts.cnab400.cnab400_shipment import Cnab400Return

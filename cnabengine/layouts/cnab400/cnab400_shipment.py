@@ -35,6 +35,9 @@ class CNAB400Shipment:
         self.__validate_header()
         self.__validate_details()
         self.__validate_trailer()
+        
+        if self.errors:
+            return self.errors
 
     def __validate_header(self) -> None:
         validate_header(self.header, self.errors)

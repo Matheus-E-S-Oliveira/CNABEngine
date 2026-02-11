@@ -1,7 +1,8 @@
 import sys
 from cnabengine.core.validators import validate_file
 from cnabengine.utils.enums import FileType
-from cnabengine.layouts.cnab400 import CNAB400Shipment
+from cnabengine.layouts.cnab400.cnab400_shipment import CNAB400Shipment
+from cnabengine.utils import log_utils
 
 def main():
     if len(sys.argv) < 2:
@@ -9,20 +10,33 @@ def main():
         print("Exemplo: python main.py arquivo.txt")
         return
 
-    caminho_arquivo = sys.argv[1]
+    file_path = sys.argv[1]
 
     try:
-        lines, extension = validate_file(caminho_arquivo)
-        
-        if(extension.lower() == FileType.REM.value):
+        lines, extension = validate_file(file_path)
+        print("\n")
+        print("✔ Arquivo carregado com sucesso.")
+        print(f"ℹ Total de linhas: {len(lines)}")
+
+        if extension.lower() == FileType.REM.value:
             file = CNAB400Shipment(lines)
-            erros = file.validate()
+            errors = file.validate()
+
+        elif extension.lower() == FileType.RET.value:
+            print("ℹ Arquivo de retorno (RET) identificado.")
+            errors = []
+
+        if errors:
+            print("-" * 50 + "\n")
+            print("✖ Validação concluída: o arquivo contém erros.")
+            print(f"ℹ Total de erros encontrados: {len(errors)}")
+                        
+            # Exibir log no terminal
+            # log_utils.show_log_terminal(errors=errors, original_file=file_path)
             
-        elif(extension.lower() == FileType.RET.value):
-            print("É um arquivo de retorno")
-        
-        print("✅ Arquivo validado com sucesso.")
-        print(f"📄 Total de linhas: {len(lines)}")
+            log_utils.save_log_txt(errors=errors, original_file=file_path)
+        else:
+            print("✔ Validação concluída: arquivo válido.")
         
     except FileNotFoundError as e:
         print(f"❌ {e}")
@@ -34,4 +48,4 @@ def main():
         print(f"❌ Erro inesperado: {e}")
     
 if __name__ == "__main__":
-    main()
+    main()  

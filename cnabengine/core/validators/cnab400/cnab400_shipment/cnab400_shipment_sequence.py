@@ -3,10 +3,15 @@ def validate_sequence(lines: list[str], errors: list[str]) -> None:
     expected = 1
 
     for i, line in enumerate(lines, start=1):
-        if not line or len(line) != 400:
+        if not line:
             errors.append(
-                f"[{context}] Linha {i}: linha inválida ou tamanho incorreto. "
-                "Esperado: 400 caracteres."
+                f"[{context}] Linha {i}: linha vazia."
+            )
+            continue
+
+        if len(line) != 400:
+            errors.append(
+                f"[{context}] Linha {i}: tamanho inválido. Esperado: 400 caracteres."
             )
             continue
 
@@ -14,7 +19,7 @@ def validate_sequence(lines: list[str], errors: list[str]) -> None:
 
         if not raw_sequence.isdigit():
             errors.append(
-                f"[{context}] Linha {i}: número do registro inválido "
+                f"[{context}] Linha {i}: número sequencial inválido "
                 f"(posição 395–400). Valor encontrado: '{raw_sequence}'."
             )
             continue
@@ -23,8 +28,8 @@ def validate_sequence(lines: list[str], errors: list[str]) -> None:
 
         if sequence != expected:
             errors.append(
-                f"[{context}] Linha {i}: número do registro fora de sequência. "
-                f"Esperado: {expected}. Encontrado: {sequence}."
+                f"[{context}] Linha {i}: sequência incorreta. "
+                f"Sequência esperada: {expected}. Sequência encontrada: {sequence}."
             )
 
         expected += 1
