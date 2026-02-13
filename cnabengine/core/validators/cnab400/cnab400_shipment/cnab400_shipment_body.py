@@ -151,6 +151,7 @@ def validate_body(body: list[str], errors: list[str]) -> None:
         StaticValidator.validate_field_space(field=line[351:391], context=context, position="352-391", errors=errors)
         
         # Posição no arquivo: 392-393
+        # Esse e por causa daquele switch que da 0, aí como não sabia se é obrigatorio este dado (provavelmente não) deixei verificando se o campo dele não esta vazio
         AlphaValidator.validate_alpha(field=line[391:393], context=context, position="392-393", errors=errors, fieldName="dias protesto")
         
         # Posição no arquivo: 394-394
@@ -166,6 +167,7 @@ def __fineFieldsLayout(line: str, context: str, errors: list[str]) -> None:
     NumericValidator.validate_numeric_no_zeros(field=line[173:174], context=context, position="174-174", errors=errors, fieldName="código da multa")
     
     # Posição no arquivo: 175-180
+    # Verificar se é obrigatorio
     DateValidator.validate_date_format_ddmmaa(field=line[174:180], context=context, position="175-180", errors=errors)
     
     # Posição no arquivo: 181-192
@@ -173,6 +175,7 @@ def __fineFieldsLayout(line: str, context: str, errors: list[str]) -> None:
     
 def __discountFieldsLayout(line: str, context: str, errors: list[str]) -> None:
     # Posição no arquivo: 174-179
+    # Verificar se é obrigatorio
     DateValidator.validate_date_format_ddmmaa(field=line[173:179], context=context, position="174-179", errors=errors)
     
     # Posição no arquivo: 180-192

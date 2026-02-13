@@ -117,6 +117,7 @@ def validate_body(details: list[str], errors: list[str]) -> None:
         NumericValidator.validate_numeric(field=line[173:175], context=context, position="174-175", errors=errors)
         
         # Posição 176-181 - Data Credito
+        # Essa campo deu erro porque foi com 000000 no lugar da data, verificar se é obrigatorio essa data
         DateValidator.validate_date_format_ddmmaa(field=line[175:181], context=context, position="176-181", errors=errors)
         
         # Posição 182-188 - Valor tarifa
@@ -186,6 +187,7 @@ def validate_body(details: list[str], errors: list[str]) -> None:
         NumericValidator.validate_numeric(field=line[381:390], context=context, position="382-390", errors=errors)
         
         # Posição 391-392 - Brancos 5
+        # Esse campo no codigo fala que e para ser número em branco, mas no arquivo que testei veio com 0 ver qual é o certo
         StaticValidator.validate_field_space(field=line[390:392], context=context, position="391-392", errors=errors)
         
         # Posição 393-394 - Canal Pagamento

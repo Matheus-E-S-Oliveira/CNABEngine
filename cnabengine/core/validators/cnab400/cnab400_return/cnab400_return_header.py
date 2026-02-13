@@ -65,9 +65,11 @@ def validate_header(header: str, errors: list[str]) -> None:
     # Validação de conversão de string descenessária
     
     # Posição 109-113 - Número Sequencial Arquivo Retorno
+    # Verificar para ver se é para vir dado aqui ta meio controversio, verificar se é obrigatorio
     NumericValidator.validate_numeric(field=header[108:113], context=context, position="109-113", errors=errors)
     
     # Posição 114-119 - Data Credito
+    # Verificar para ver se é para vir dado aqui ta meio controversio, verificar se é obrigatorio
     DateValidator.validate_date_format_ddmmaa(field=header[113:119], context=context, position="114-119", errors=errors)
     
     # Posição 120-394 - Complemento Registro 3
