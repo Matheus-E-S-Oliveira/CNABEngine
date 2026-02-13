@@ -4,7 +4,7 @@ def validate_structure(lines: list[str], errors: list[str]) -> None:
     if len(lines) < 3:
         errors.append(
             f"[{context}] Estrutura inválida: o arquivo deve conter "
-            "HEADER, ao menos um BODY e TRAILER."
+            "HEADER, ao menos um BODY e TRILLER."
         )
         return
 
@@ -15,12 +15,12 @@ def validate_structure(lines: list[str], errors: list[str]) -> None:
 
     if not lines[-1] or lines[-1][0] != "9":
         errors.append(
-            f"[{context}] Estrutura inválida: a última linha deve ser um TRAILER (registro '9')."
+            f"[{context}] Estrutura inválida: a última linha deve ser um TRILLER (registro '9')."
         )
 
     for index, line in enumerate(lines[1:-1], start=2):
         if not line or line[0] != "7":
             errors.append(
                 f"[{context}] Linha {index}: registro inválido. "
-                "Entre HEADER e TRAILER são permitidos apenas registros do tipo '7' (BODY)."
+                "Entre HEADER e TRILLER são permitidos apenas registros do tipo '7' (BODY)."
             )

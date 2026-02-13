@@ -2,6 +2,7 @@ import sys
 from cnabengine.core.validators import validate_file
 from cnabengine.utils.enums import FileType
 from cnabengine.layouts.cnab400.cnab400_shipment import CNAB400Shipment
+from cnabengine.layouts.cnab400.cnab400_return import CNAB400Return
 from cnabengine.utils import log_utils
 
 def main():
@@ -23,8 +24,8 @@ def main():
             errors = file.validate()
 
         elif extension.lower() == FileType.RET.value:
-            print("ℹ Arquivo de retorno (RET) identificado.")
-            errors = []
+            file = CNAB400Return(lines)
+            errors = file.validate()
 
         if errors:
             print("-" * 50 + "\n")

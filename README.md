@@ -7,7 +7,7 @@ CNABEngine é um projeto em Python para **validação e processamento de arquivo
 Fornecer uma engine simples, extensível e reutilizável para:
 - Validar estrutura de arquivos CNAB
 - Garantir tamanho de linhas
-- Verificar registros Header, Detail e Trailer
+- Verificar registros Header, Detail e Triller
 - Preparar base para parsing futuro
 
 ## 🧩 Funcionalidades (em desenvolvimento)

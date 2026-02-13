@@ -1,17 +1,16 @@
 from cnabengine.utils.enums import FileType, ModelCNAB
 from cnabengine.core.validators.core import validate_sequence, validate_structure
-from cnabengine.core.validators.cnab400.cnab400_shipment import (
-    validate_header,
+from cnabengine.core.validators.cnab400.cnab400_return import (
     validate_body,
-    validate_triller,
+    validate_header,
 )
 
 
-class CNAB400Shipment:
+class CNAB400Return:
     def __init__(self, lines: list[str]):
         self.lines = lines
         self.model = ModelCNAB.CNAB400.value
-        self.tipo = FileType.REM.value
+        self.tipo = FileType.RET.value
 
         self.header: str | None = None
         self.details: list[str] = []
@@ -19,7 +18,7 @@ class CNAB400Shipment:
 
         self.errors: list[str] = []
 
-    def validate(self) -> None:
+    def validate(self) -> list[str]:
         validate_structure(self.lines, self.errors)
 
         if self.errors:
@@ -47,7 +46,7 @@ class CNAB400Shipment:
 
     def __validate_triller(self) -> None:
         number_lines = len(self.lines)
-        validate_triller(self.triller, self.errors, number_lines)
+        # validate_triller(self.triller, self.errors, number_lines)
 
     def __check_errors(self) -> list[str]:
         if self.errors:
