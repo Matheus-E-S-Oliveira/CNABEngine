@@ -15,7 +15,8 @@ UPLOAD_FOLDER = "temp"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def group_errors(errors):
-    grouped = {}
+    grouped = [] 
+    context_map = {} 
 
     for error in errors:
         if "] " in error:
@@ -25,7 +26,11 @@ def group_errors(errors):
             context = "Geral"
             message = error
 
-        grouped.setdefault(context, []).append(message)
+        if context not in context_map:
+            context_map[context] = []
+            grouped.append((context, context_map[context]))
+
+        context_map[context].append(message)
 
     return grouped
 

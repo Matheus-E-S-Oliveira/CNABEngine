@@ -92,7 +92,7 @@
     </section>
     {% endif %} {% if result.grouped_errors %}
     <section class="result error">
-      {% for context, messages in result.grouped_errors.items() %}
+      {% for context, messages in result.grouped_errors %}
       <div class="error-group">
         <h3>{{ context }}</h3>
         <ul>
