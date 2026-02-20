@@ -1,2 +1,3 @@
 # Dependências futuras
 pytest
+flask
