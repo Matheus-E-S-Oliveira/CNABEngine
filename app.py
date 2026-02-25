@@ -108,7 +108,7 @@ def export():
     content.append("\nErros:\n")
 
     if result["grouped_errors"]:
-        for group, errors in result["grouped_errors"].items():
+        for group, errors in result["grouped_errors"]:
             content.append(group)
             for err in errors:
                 content.append(f"  - {err}")
